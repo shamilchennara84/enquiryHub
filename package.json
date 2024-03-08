@@ -1,0 +1,29 @@
+{
+  "name": "enquiryhub",
+  "version": "1.0.0",
+  "description": "machine task ",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"tsc -w\" \"nodemon dist/index.js\""
+  },
+  "author": "shamil p p",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "mongoose": "^8.2.1",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.25",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2",
+    "typescript-eslint": "^7.1.1"
+  }
+}
