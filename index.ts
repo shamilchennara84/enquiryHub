@@ -1,7 +1,8 @@
 import { createServer } from "./frameworks/webserver/express";
 import { mongoDBConnect } from "./frameworks/database/mongoDB/connection";
+import config from "./config/config";
 
-const PORT = process.env.PORT || 3000;
+const PORT = config.port
 
 const app = createServer();
 

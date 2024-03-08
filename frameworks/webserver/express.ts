@@ -1,4 +1,5 @@
 import express from "express";
+import { } from "frameworks/services/typesenseClient";
 
 
 export const createServer = () => {
@@ -6,6 +7,9 @@ export const createServer = () => {
     const app = express();
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+
+    // await createUserProfilesCollection();
+    // await createEnquiriesCollection();
 
     //  app.use("/api/user", userRouter);
 
