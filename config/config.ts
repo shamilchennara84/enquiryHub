@@ -2,6 +2,7 @@ import "dotenv/config";
 
 export default {
   port: process.env.PORT || 3000,
+  sessionSeret:process.env.SESSION_SECRET,
   mongo: {
     uri: process.env.MONGO_URL || "mongodb://localhost:27017/enquiryHub",
   },

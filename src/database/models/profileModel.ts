@@ -1,11 +1,12 @@
-import { IProfile } from "@interfaces/profileInterface";
-import mongoose, { Document, Schema } from "mongoose";
+
+import { IProfile } from "../../interfaces/schemaInterfaces/profileInterface";
+import mongoose, { Document, Model, Schema } from "mongoose";
 
 export interface IProfileDocument extends IProfile, Document {}
 
 const ProfileSchema: Schema = new Schema<IProfileDocument>(
   {
-    user_id: {
+    user_Id: {
       type: Schema.Types.ObjectId,
       ref: "User", // Reference to the User model
       required: true,
@@ -17,5 +18,6 @@ const ProfileSchema: Schema = new Schema<IProfileDocument>(
   },
   { timestamps: true },
 );
+ const ProfileModel: Model<IProfileDocument> = mongoose.model<IProfileDocument>("Profile", ProfileSchema);
 
-export const ProfileModel = mongoose.model<IProfileDocument>("Profile", ProfileSchema);
+export default ProfileModel;

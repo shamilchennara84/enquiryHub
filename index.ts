@@ -1,8 +1,8 @@
-import { createServer } from "./frameworks/webserver/express";
-import { mongoDBConnect } from "./frameworks/database/mongoDB/connection";
+import { createServer } from "./webserver/express";
+import { mongoDBConnect } from "./src/database/connection";
 import config from "./config/config";
 
-const PORT = config.port
+const PORT = config.port;
 
 const app = createServer();
 

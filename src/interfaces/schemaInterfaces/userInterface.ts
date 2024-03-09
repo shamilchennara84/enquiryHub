@@ -5,7 +5,8 @@ export interface IUser {
   first_name: string;
   last_name: string;
   email: string;
-  profile_id: ObjectId;
+  password:string;
+  profile_id?: ObjectId;
 }
 
 export interface IUserResponse extends IUser {

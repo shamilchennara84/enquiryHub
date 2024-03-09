@@ -1,4 +1,4 @@
-import { IEnquiry } from "@interfaces/enquiryInterface";
+import { IEnquiry } from "../../interfaces/schemaInterfaces/enquiryInterface";
 import mongoose, { Document, Schema} from "mongoose";
 
 export interface IEnquiryDocument extends IEnquiry, Document {}
@@ -18,4 +18,6 @@ const EnquirySchema: Schema = new Schema<IEnquiryDocument>(
   { timestamps: true },
 );
 
-export const EnquiryModel = mongoose.model<IEnquiryDocument>("Enquiry", EnquirySchema);
+const EnquiryModel = mongoose.model<IEnquiryDocument>("Enquiry", EnquirySchema);
+
+export default EnquiryModel;
