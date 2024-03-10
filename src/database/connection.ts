@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import config from "../../../config/config";
+import config from "../../config/config";
 export const mongoDBConnect = async () => {
   try {
     const MONGO_URL = config.mongo.uri;
