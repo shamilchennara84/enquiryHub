@@ -30,6 +30,7 @@ const UserSchema: Schema = new Schema<IUserDocument>(
     profile_id: {
       type: Schema.Types.ObjectId,
       ref: "Profiles",
+      
     },
   },
   { timestamps: true },

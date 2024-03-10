@@ -1,6 +1,4 @@
-import initializeTypesenseClient from "../../utils/services/typesenseClient";
-
-
+import initializeTypesenseClient from "./typesenseClient";
 
 const sortingOptions = {
   created_date_asc: "created_date:asc",
