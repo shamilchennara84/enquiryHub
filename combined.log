@@ -62,3 +62,12 @@
 {"level":"info","message":"GET /api/users/profile 404 - 21ms"}
 {"level":"info","message":"POST /api/users/createProfile 200 - 39ms"}
 {"level":"info","message":"GET /api/users/profile 200 - 9ms"}
+{"level":"info","message":"POST /api/users/register 400 - 182ms"}
+{"level":"info","message":"POST /api/users/register 400 - 30ms"}
+{"level":"info","message":"POST /api/users/register 400 - 28ms"}
+{"level":"info","message":"POST /api/users/register 400 - 25ms"}
+{"level":"info","message":"POST /api/users/register 500 - 414ms"}
+{"level":"info","message":"POST /api/users/register 500 - 286ms"}
+{"level":"info","message":"POST /api/users/register 500 - 422ms"}
+{"level":"info","message":"POST /api/users/register 500 - 287ms"}
+{"level":"info","message":"POST /api/users/register 400 - 288ms"}

@@ -65,6 +65,8 @@ export const validateRegisterData = async (req: Request, res: Response, next: Ne
 
     next();
   };
+
+
    
   
 

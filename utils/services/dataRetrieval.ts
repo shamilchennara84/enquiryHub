@@ -1,4 +1,6 @@
-import { client } from "./typesenseClient";
+import initializeTypesenseClient from "../../utils/services/typesenseClient";
+
+
 
 const sortingOptions = {
   created_date_asc: "created_date:asc",
@@ -12,7 +14,8 @@ export async function getUserProfileAndEnquiries(
   sortOptionKey: keyof typeof sortingOptions,
   searchQuery: string,
 ) {
-     const sortOption = sortingOptions[sortOptionKey];
+  const sortOption = sortingOptions[sortOptionKey];
+  const client = await initializeTypesenseClient();
   const userProfile = await client
     .collections("profiles")
     .documents()
@@ -22,17 +25,17 @@ export async function getUserProfileAndEnquiries(
       sort_by: sortOption,
     });
 
-  const userEnquiries = await client
-    .collections("enquiries")
-    .documents()
-    .search({
-      q: `createdBy:${userId} AND ${searchQuery}`,
-      query_by: "createdBy",
-      sort_by: sortOption,
-    });
+  // const userEnquiries = await client
+  //   .collections("enquiries")
+  //   .documents()
+  //   .search({
+  //     q: `createdBy:${userId} AND ${searchQuery}`,
+  //     query_by: "createdBy",
+  //     sort_by: sortOption,
+  //   });
 
   return {
     profile: userProfile,
-    enquiries: userEnquiries,
+    // enquiries: userEnquiries,
   };
 }

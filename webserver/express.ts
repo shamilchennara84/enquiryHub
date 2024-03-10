@@ -1,8 +1,10 @@
 import express from "express";
-
 import {} from "utils/services/typesenseClient";
 import userRoutes from "../src/routes/userRoutes";
 import apiLogger from "../src/middlewares/loggerMiddleware"
+import { errorHandler } from "../src/middlewares/errorHandler";
+import { typesenseSetupMiddleware } from "../src/middlewares/typesenseSetupMiddleware";
+// import typesenseRouter from "src/routes/typeSenseRouter";
 
 export const createServer = () => {
   try {
@@ -10,14 +12,16 @@ export const createServer = () => {
     app.use(apiLogger);
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
+ 
+    app.use(typesenseSetupMiddleware); // create typesense collection if it is not already exist
 
-    // await createUserProfilesCollection();
-    // await createEnquiriesCollection();
+ 
 
     app.use("/api/users", userRoutes);
-    // app.use("/profiles", profileRoutes);
-    // app.use("/enquiries", enquiryRoutes);
+    // app.use("/api/typesense", typesenseRouter);
 
+    // app.use("/enquiries", enquiryRoutes);
+    app.use(errorHandler);
     return app;
   } catch (error) {
     const err: Error = error as Error;

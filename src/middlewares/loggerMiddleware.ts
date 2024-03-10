@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import logger from "../../utils/winston";
+import {logger} from "../../utils/winston";
 
 const apiLogger = (req: Request, res: Response, next: NextFunction) => {
   const { method, url } = req;

@@ -13,7 +13,11 @@ userRouter.post("/createProfile",authLogin, validateProfileData, userController.
 userRouter.get("/profile",authLogin, userController.getUserProfile);
 userRouter.patch("/updateProfile/:profileId", authLogin, validateProfileData, userController.editProfile);
 userRouter.delete("/deleteProfile/:profileId", authLogin, userController.deleteProfile);
-// userRouter.delete("/deleteProfile/:id", userController.deleteProfile);
 
+//User Enquiries routes
+// userRouter.post("/createEnquiry", authLogin, validateEnquiryData, userController.createEnquiry);
+// userRouter.get("/enquiries", authLogin, userController.getUserEnquiries);
+// userRouter.patch("/updateEnquiry/:enquiryId", authLogin, validateEnquiryData, userController.editEnquiry);
+// userRouter.delete("/deleteEnquiry/:enquiryId", authLogin, userController.deleteEnquiry);
 
 export default userRouter;
