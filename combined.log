@@ -58,3 +58,7 @@
 {"level":"info","message":"PATCH /api/users/updateProfile/65ec8930f417e4a53d7467e5 404 - 6ms"}
 {"level":"info","message":"PATCH /api/users/updateProfile/65ec933c9c2fdadd545e2230 200 - 8ms"}
 {"level":"info","message":"DELETE /api/users/deleteProfile/65ec933c9c2fdadd545e2230 200 - 8ms"}
+{"level":"info","message":"GET /api/users/getProfile 404 - 6ms"}
+{"level":"info","message":"GET /api/users/profile 404 - 21ms"}
+{"level":"info","message":"POST /api/users/createProfile 200 - 39ms"}
+{"level":"info","message":"GET /api/users/profile 200 - 9ms"}
