@@ -1,33 +1,30 @@
-Project Name
-Brief description of your project goes here. Include what it does, its purpose, and any key features.
+# enquiryHub
 
-Table of Contents
-Installation
-Usage
-Contributing
-License
-Installation
-Provide instructions on how to install and set up your project. Include any dependencies that need to be installed and how to install them.
+## Description
 
-bash
-Copy code
-# Example installation steps
-git clone https://github.com/your_username/your_project.git
-cd your_project
-npm install
-Usage
-Explain how to use your project. Provide examples or code snippets if necessary. Include any configuration options and how to use them.
+enquiryHub is a backend application designed to manage user enquiries and profiles. It provides functionalities for creating, retrieving, updating, and deleting data related to enquiries and profiles. This project is built with Node.js, utilizing Express.js for the web server, Mongoose for MongoDB object modeling, and Typesense for search functionality.
 
-bash
-Copy code
-# Example usage
-node app.js
-Contributing
-Briefly explain how others can contribute to your project. Include guidelines for submitting pull requests, reporting bugs, or suggesting enhancements.
+## Features
 
-Fork the repository
-Create a new branch (git checkout -b feature)
-Make your changes
-Commit your changes (git commit -am 'Add new feature')
-Push to the branch (git push origin feature)
-Create a new Pull Request
+- **User Management:** Create, retrieve, update, and delete user profiles.
+- **Enquiry Handling:** Manage user enquiries with functionalities for creating, retrieving, and deleting enquiries.
+- **Authentication:** Secure user authentication using JWT tokens.
+- **Search Functionality:** Utilize Typesense for efficient search operations.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14.x or higher)
+- MongoDB(should enabled replica set)
+- Typesense
+
+### Installation
+
+1. Clone the repository:
+2. Navigate to the project directory:
+3. Set up environment variables by creating a `.env` file in the root directory (refer .env.example)
+4. Start the application:
+## API Documentation
+
+API documentation is crucial for understanding how to interact with the backend. You can find the API documentation by visiting `/api-docs` endpoint if you have Swagger or a similar tool set up.
