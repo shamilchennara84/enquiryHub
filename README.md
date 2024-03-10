@@ -48,7 +48,7 @@ enquiryHub uses JWT (JSON Web Tokens) for authentication. To authenticate, you m
         "first_name": "sample",
         "last_name": "Doe",
         "email": "ssss@example.com",
-        "password": "$2b$10$SunuDY/wbtV.su8xsq.g/uQYyrD5dwE3ilIGp7EtAoQFtNughwuBi",
+        "password": "{{hashedPassword}}",
         "_id": "65edb7320f4748d1ab6f6634",
         "createdAt": "2024-03-10T13:35:46.151Z",
         "updatedAt": "2024-03-10T13:35:46.151Z",
@@ -70,12 +70,12 @@ enquiryHub uses JWT (JSON Web Tokens) for authentication. To authenticate, you m
         "first_name": "sample",
         "last_name": "Doe",
         "email": "ssss@example.com",
-        "password": "$2b$10$SunuDY/wbtV.su8xsq.g/uQYyrD5dwE3ilIGp7EtAoQFtNughwuBi",
+        "password": "{{hashedPassword}}",
         "createdAt": "2024-03-10T13:35:46.151Z",
         "updatedAt": "2024-03-10T13:35:46.151Z",
         "__v": 0
     },
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVkYjczMjBmNDc0OGQxYWI2ZjY2MzQiLCJleHAiOjE3MTAwODg1NDksImlhdCI6MTcxMDA3Nzc0OS42NDV9.QjYhxtVTmpMIt8e7KOd6q5SL8rwg4wrNCaiicSgJ1vs"
+    "token": "{{JWT TOKEN}}"
 }
 
 ### Profile Management
@@ -84,7 +84,7 @@ enquiryHub uses JWT (JSON Web Tokens) for authentication. To authenticate, you m
 
 - **Endpoint**: `GET /api/users/profile`
 - **Description**: Retrieves the profile of a user.
-- **Headers**:{Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVkYjYwMzBmNDc0OGQxYWI2ZjY2MjEiLCJleHAiOjE3MTAwODgyNDYsImlhdCI6MTcxMDA3NzQ0Ni4zMTN9.plSYpOxc9SXaGXEeFGGIE4k2DwKWcB2ZAIZjpTjxXH8}
+- **Headers**:{Authorization: bearer "{{JWT TOKEN}}"}
 - **Response**: {
     "message": "Profile retrieved successfully",
     "profile": {
@@ -101,7 +101,7 @@ enquiryHub uses JWT (JSON Web Tokens) for authentication. To authenticate, you m
 
 - **Endpoint**: `POST /api/users/createProfile`
 - **Description**: Creates a new profile for a user.
-- **Headers**:{Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWVkYjYwMzBmNDc0OGQxYWI2ZjY2MjEiLCJleHAiOjE3MTAwODgyNDYsImlhdCI6MTcxMDA3NzQ0Ni4zMTN9.plSYpOxc9SXaGXEeFGGIE4k2DwKWcB2ZAIZjpTjxXH8}
+- **Headers**:{Authorization: bearer "{{JWT TOKEN}}"}
 - **Request Body**:{
     "profile_info":"Developer"
 }
