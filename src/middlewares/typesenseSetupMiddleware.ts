@@ -6,7 +6,7 @@ import {
   usersCollectionSchema,
 } from "../../utils/typesense/collectionCreator";
 
-export const typesenseSetupMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const initializeTypesense = async (req: Request, res: Response, next: NextFunction) => {
   try {
     console.log("typesenseSetupMiddleware");
     const userSchema = usersCollectionSchema;

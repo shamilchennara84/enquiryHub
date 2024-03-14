@@ -137,3 +137,10 @@
 {"level":"info","message":"DELETE /api/users/deleteProfile/65edb4d932bb356b3f7f8300 200 - 757ms"}
 {"level":"info","message":"POST /api/users/createProfile 200 - 859ms"}
 {"level":"info","message":"POST /api/users/createProfile 200 - 800ms"}
+{"level":"info","message":"POST /api/users/login 200 - 727ms"}
+{"level":"info","message":"GET /api/users/profile 404 - 832ms"}
+{"level":"info","message":"POST /api/users/createProfile 200 - 800ms"}
+{"level":"info","message":"POST /api/users/createProfile 400 - 673ms"}
+{"level":"info","message":"GET /api/users/profile 200 - 912ms"}
+{"level":"info","message":"POST /api/users/createProfile 200 - 2988ms"}
+{"level":"info","message":"POST /api/users/register 201 - 1307ms"}
