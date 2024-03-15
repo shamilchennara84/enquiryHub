@@ -26,8 +26,8 @@ export const typesenseChangeStreamMiddleware = async (req: Request, res: Respons
    
 
       changeStream.on("change", async (change) => {
-        console.log(change.operationType, "opertaion type");
-        console.log("event captureed");
+        console.log(change.operationType, "operation type");
+        console.log("event captured");
         await handleChangeAndUpdateTypesense(change, typesense, collectionName);
       });
 
@@ -70,7 +70,7 @@ async function handleChangeAndUpdateTypesense(change: any, typesense: Client, co
       await updateDocumentInTypesense(documentKey, updatedFields, typesense, collectionName);
     }
   } else if (change.operationType === "delete") {
-    console.log("deletehandler");
+    console.log("delete handler");
     const documentKey = change.documentKey;
     console.log(`Delete operation in collection: ${collectionName}`);
 

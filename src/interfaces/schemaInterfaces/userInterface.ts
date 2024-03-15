@@ -1,4 +1,5 @@
 import { ObjectId } from "mongoose";
+import { IProfileResponse } from "./profileInterface";
 
 export interface IUser {
   type: "user" | "admin";
@@ -20,4 +21,8 @@ export interface UserRow {
   Last_Name: string;
   Email: string;
   Info: string;
+}
+
+export interface IUserData extends IUserResponse {
+  profileData: IProfileResponse;
 }

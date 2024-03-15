@@ -4,10 +4,9 @@ import { hashPassword } from "../../utils/bcrypt";
 import { decodeToken, generateAccessToken } from "../../utils/jwt";
 import ProfileModel from "../database/models/profileModel";
 
-const usercontroller = {
+const userController = {
   createUser: async (req: Request, res: Response) => {
     try {
-      console.log("testing");
       const { first_name, last_name, email, password } = req.body;
       const hashedPassword = await hashPassword(password);
 
@@ -30,7 +29,7 @@ const usercontroller = {
     try {
       const user = req.body.user;
       const JWTtoken = await generateAccessToken(user);
-      res.status(200).json({ message: "Login successfull", user: user, token: JWTtoken });
+      res.status(200).json({ message: "Login successful", user: user, token: JWTtoken });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }
@@ -38,10 +37,8 @@ const usercontroller = {
 
   getUserProfile: async (req: Request, res: Response) => {
     try {
-      const token = req.headers["authorization"];
-      const decoded = await decodeToken((token as string).slice(7));
-      const userId = decoded.userId;
-      const profile = await ProfileModel.findOne({ user_Id: userId });
+      const user_Id = req.params.userId;
+      const profile = await ProfileModel.findOne({ user_Id });
       if (!profile) {
         return res.status(404).json({ message: "Profile not found" });
       }
@@ -62,14 +59,14 @@ const usercontroller = {
         return res.status(400).json({ message: "Profile already exists for this user" });
       }
       console.log(userId);
-      const newprofile = new ProfileModel({
+      const newProfile = new ProfileModel({
         user_Id: userId,
         profile_info,
       });
-      console.log(newprofile, "creaaaaatd profile 1");
-      const createdProfile = await newprofile.save();
-      const userupdated = await UserModel.findByIdAndUpdate(userId, { profile_id: createdProfile._id }, { new: true });
-      console.log(userupdated);
+      console.log(newProfile, "created profile 1");
+      const createdProfile = await newProfile.save();
+      const userUpdated = await UserModel.findByIdAndUpdate(userId, { profile_id: createdProfile._id }, { new: true });
+      console.log(userUpdated);
 
       res.status(200).json({ message: "Profile created and user updated", createdProfile });
     } catch (error) {
@@ -125,5 +122,6 @@ const usercontroller = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
+  
 };
-export default usercontroller;
+export default userController;
