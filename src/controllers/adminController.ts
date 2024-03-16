@@ -6,6 +6,7 @@ import TeamModel from "../../src/database/models/teamModel";
 const userRepository = new UserRepository();
 
 const adminController = {
+  //Handles the login process for an admin user by generating a JWT token.
   loginAdmin: async (req: Request, res: Response) => {
     try {
       const admin = req.body.admin;
@@ -16,6 +17,7 @@ const adminController = {
     }
   },
 
+  //Retrieves details of all users from the database.
   fetchAllUsers: async (req: Request, res: Response) => {
     try {
       const users = await userRepository.fetchAllUserDataWithProfile();
@@ -24,7 +26,7 @@ const adminController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-
+  //Creates a new team in the database.
   createTeam: async (req: Request, res: Response) => {
     try {
       const { teamName } = req.body;
@@ -34,7 +36,7 @@ const adminController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-
+  //Retrieves details of a specific team by its ID.
   getTeam: async (req: Request, res: Response) => {
     try {
       const teamId = req.params.teamId;
@@ -47,6 +49,7 @@ const adminController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
+  //Retrieves details of all teams from the database.
   getAllTeams: async (req: Request, res: Response) => {
     try {
       const teams = await TeamModel.find({});
@@ -58,6 +61,7 @@ const adminController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
+  //Updates the name of a team.
   editTeamName: async (req: Request, res: Response) => {
     try {
       const teamId = req.params.teamId;
@@ -79,7 +83,7 @@ const adminController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-
+  //Adds a new member to a team.
   addNewMember: async (req: Request, res: Response) => {
     try {
       const { teamId, userId } = req.params;
@@ -100,7 +104,7 @@ const adminController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-
+  //Removes a member from a team.
   removeTeamMember: async (req: Request, res: Response) => {
     try {
       const { teamId, userId } = req.params;

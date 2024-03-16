@@ -5,6 +5,7 @@ import { decodeToken, generateAccessToken } from "../../utils/jwt";
 import ProfileModel from "../database/models/profileModel";
 
 const userController = {
+  // Method for creating a new user
   createUser: async (req: Request, res: Response) => {
     try {
       const { first_name, last_name, email, password } = req.body;
@@ -25,6 +26,7 @@ const userController = {
     }
   },
 
+  // Method for authenticating and logging in a user
   loginUser: async (req: Request, res: Response) => {
     try {
       const user = req.body.user;
@@ -35,6 +37,7 @@ const userController = {
     }
   },
 
+  // Method for retrieving user profile
   getUserProfile: async (req: Request, res: Response) => {
     try {
       const user_Id = req.params.userId;
@@ -48,6 +51,7 @@ const userController = {
     }
   },
 
+  // Method for creating a new profile
   createProfile: async (req: Request, res: Response) => {
     try {
       const token = req.headers["authorization"];
@@ -58,15 +62,14 @@ const userController = {
       if (profile) {
         return res.status(400).json({ message: "Profile already exists for this user" });
       }
-      console.log(userId);
       const newProfile = new ProfileModel({
         user_Id: userId,
         profile_info,
       });
-      console.log(newProfile, "created profile 1");
+ 
       const createdProfile = await newProfile.save();
       const userUpdated = await UserModel.findByIdAndUpdate(userId, { profile_id: createdProfile._id }, { new: true });
-      console.log(userUpdated);
+
 
       res.status(200).json({ message: "Profile created and user updated", createdProfile });
     } catch (error) {
@@ -74,6 +77,7 @@ const userController = {
     }
   },
 
+  // Method for editing an existing profile
   editProfile: async (req: Request, res: Response) => {
     try {
       const token = req.headers["authorization"];
@@ -99,6 +103,7 @@ const userController = {
     }
   },
 
+  // Method for deleting an existing profile
   deleteProfile: async (req: Request, res: Response) => {
     try {
       const token = req.headers["authorization"];
@@ -122,6 +127,5 @@ const userController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-  
 };
 export default userController;

@@ -184,3 +184,12 @@
 {"level":"info","message":"POST /api/user/register 201 - 204ms"}
 {"level":"info","message":"POST /api/user/login 200 - 138ms"}
 {"level":"info","message":"POST /api/user/enquiry 201 - 288ms"}
+{"level":"info","message":"POST /api/user/login 200 - 197ms"}
+{"level":"info","message":"POST /api/admin/login 200 - 131ms"}
+{"level":"info","message":"POST /api/admin/team 200 - 202ms"}
+{"level":"info","message":"POST /api/user/enquiry 400 - 2ms"}
+{"level":"info","message":"POST /api/user/login 200 - 130ms"}
+{"level":"info","message":"POST /api/user/enquiry 201 - 201ms"}
+{"level":"info","message":"POST /api/user/enquiry 201 - 241ms"}
+{"level":"info","message":"POST /api/admin/team 200 - 235ms"}
+{"level":"info","message":"POST /api/user/enquiries/65f513a585c3ebb46c4cf154/teams/65f519c61c9264326b0199fd 200 - 257ms"}

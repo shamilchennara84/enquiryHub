@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import {  IUserEmail } from "src/interfaces/schemaInterfaces/enquiryInterface";
 
 export async function sendExpiryNotificationEmails(expiredEnquiries: IUserEmail[]) {
+  // Create a transporter for sending emails using nodemailer
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -10,8 +11,7 @@ export async function sendExpiryNotificationEmails(expiredEnquiries: IUserEmail[
       pass: config.gmailPass,
     },
   });
-
-
+  // Iterate over each expired enquiry and send expiry notification email
   for (const enquiry of expiredEnquiries) {
     const mailOptions = {
       from: config.gmailId,
@@ -21,6 +21,7 @@ export async function sendExpiryNotificationEmails(expiredEnquiries: IUserEmail[
     };
 
     try {
+      // Send the email
       await transporter.sendMail(mailOptions);
       console.log(`Email sent to ${enquiry.user.email}`);
     } catch (error) {

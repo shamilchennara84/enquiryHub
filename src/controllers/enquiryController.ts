@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import EnquiryModel from "../../src/database/models/enquiryModel";
 import { decodeToken } from "../../utils/jwt";
+import { Schema } from "mongoose";
 
 const enquiryController = {
+  // Method for creating a new enquiry
   createEnquiry: async (req: Request, res: Response) => {
     try {
       const { question, teams } = req.body;
@@ -22,7 +24,7 @@ const enquiryController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-
+  // Method for removing a team from an enquiry
   removeTeam: async (req: Request, res: Response) => {
     try {
       const enquiryId = req.params.enquiryId;
@@ -32,7 +34,7 @@ const enquiryController = {
       if (!enquiry) {
         return res.status(404).json({ error: "Enquiry not found" });
       }
-      const teamIndex = enquiry.teams.indexOf(teamId);
+      const teamIndex = enquiry.teams.indexOf(new Schema.Types.ObjectId(teamId));
       if (teamIndex === -1) {
         return res.status(404).json({ error: "Team not found in the enquiry" });
       }
@@ -45,6 +47,7 @@ const enquiryController = {
     }
   },
 
+  // Method for adding a team to an enquiry
   addTeam: async (req: Request, res: Response) => {
     try {
       const enquiryId = req.params.enquiryId;
@@ -53,11 +56,13 @@ const enquiryController = {
       if (!enquiry) {
         return res.status(404).json({ error: "Enquiry not found" });
       }
-      const teamIndex = enquiry.teams.indexOf(teamId);
+      const teamIdObjectId = new Schema.Types.ObjectId(teamId);
+      const teamIndex = enquiry.teams.indexOf(teamIdObjectId);
+
       if (teamIndex !== -1) {
         return res.status(400).json({ error: "Team already exists in the enquiry" });
       }
-      enquiry.teams.push(teamId);
+      enquiry.teams.push(teamIdObjectId);
       await enquiry.save();
       res.status(200).json({ message: "Team added successfully to the enquiry", enquiry });
     } catch (error) {
@@ -65,7 +70,8 @@ const enquiryController = {
       res.status(500).json({ error: "Internal server error" });
     }
   },
-
+  
+  // Method for retrieving enquiries created by a specific user
   getUserEnquiries: async (req: Request, res: Response) => {
     try {
       const userId = req.params.userId;
@@ -80,6 +86,7 @@ const enquiryController = {
     }
   },
 
+  // Method for deleting an enquiry
   deleteEnquiry: async (req: Request, res: Response) => {
     try {
       const enquiryId = req.params.enquiryId;
@@ -87,7 +94,7 @@ const enquiryController = {
       if (!token) {
         return res.status(401).json({ error: "Authorization token is missing" });
       }
-      const decoded = await decodeToken(token.slice(7)); 
+      const decoded = await decodeToken(token.slice(7));
       const userId = decoded.userId;
 
       const enquiry = await EnquiryModel.findById(enquiryId);

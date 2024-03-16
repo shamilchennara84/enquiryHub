@@ -56,7 +56,8 @@ export const validateRegisterData = async (req: Request, res: Response, next: Ne
       return res.status(500).json({ error: "Server error" });
     }
   }
-  //adminLogin validation
+
+// Validate admin login data
   export const validateAdminLoginData = async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
 
@@ -66,7 +67,6 @@ export const validateRegisterData = async (req: Request, res: Response, next: Ne
 
     try {
       const admin = await UserModel.findOne({ type:'admin',email });
-      console.log(admin);
       if (!admin) {
         return res.status(400).json({ error: "admin not found" });
       }
@@ -83,6 +83,7 @@ export const validateRegisterData = async (req: Request, res: Response, next: Ne
     }
   }
  
+  // Validate profile data
   export const validateProfileData = async(req: Request, res: Response, next: NextFunction) => {
     const { profile_info } = req.body;
 
@@ -92,7 +93,7 @@ export const validateRegisterData = async (req: Request, res: Response, next: Ne
 
     next();
   };
-  
+  // Validate team data
   export const validateTeamData = async (req: Request, res: Response, next: NextFunction) => {
     const { teamName } = req.body;
 
@@ -112,6 +113,7 @@ export const validateRegisterData = async (req: Request, res: Response, next: Ne
     }
   };
 
+// Validate team and user data
   export const validateTeamUser = async (req: Request, res: Response, next: NextFunction) => {
  const { teamId, userId } = req.params;
 
@@ -132,6 +134,7 @@ export const validateRegisterData = async (req: Request, res: Response, next: Ne
  }
 }
 
+// Validate enquiry data
 export const validateEnquiryData = async (req: Request, res: Response, next: NextFunction) => {
   const { question, teams } = req.body;
 
