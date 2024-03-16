@@ -1,12 +1,17 @@
+import config from "../config/config";
 import winston from "winston";
 
+// Logger for general logging
 export const logger = winston.createLogger({
   level: "info",
   format: winston.format.json(),
-  transports: [new winston.transports.File({ filename: "combined.log" })],
+  transports: [
+    // Log to a file named combined.log
+    new winston.transports.File({ filename: "combined.log" }),
+  ],
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (config.nodeEnv !== "production") {
   logger.add(
     new winston.transports.Console({
       format: winston.format.simple(),
@@ -14,7 +19,8 @@ if (process.env.NODE_ENV !== "production") {
   );
 }
 
-export const Errorlogger = winston.createLogger({
+// Logger for error logging
+export const ErrorLogger = winston.createLogger({
   level: "info",
   format: winston.format.json(),
   transports: [
@@ -22,6 +28,3 @@ export const Errorlogger = winston.createLogger({
     new winston.transports.Console(),
   ],
 });
-
-
-

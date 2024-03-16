@@ -7,12 +7,20 @@ const EnquirySchema: Schema = new Schema<IEnquiryDocument>(
   {
     createdBy: {
       type: Schema.Types.ObjectId,
-      ref: "User", 
+      ref: "User",
       required: true,
     },
     teams: {
-      type: [String],
+      type: [Schema.Types.ObjectId], 
       required: true,
+    },
+    question: {
+      type: String,
+      required: true,
+    },
+    isExpired: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true },

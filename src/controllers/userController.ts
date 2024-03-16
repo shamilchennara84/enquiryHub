@@ -4,10 +4,10 @@ import { hashPassword } from "../../utils/bcrypt";
 import { decodeToken, generateAccessToken } from "../../utils/jwt";
 import ProfileModel from "../database/models/profileModel";
 
-const usercontroller = {
+const userController = {
+  // Method for creating a new user
   createUser: async (req: Request, res: Response) => {
     try {
-      console.log("testing");
       const { first_name, last_name, email, password } = req.body;
       const hashedPassword = await hashPassword(password);
 
@@ -26,22 +26,22 @@ const usercontroller = {
     }
   },
 
+  // Method for authenticating and logging in a user
   loginUser: async (req: Request, res: Response) => {
     try {
       const user = req.body.user;
       const JWTtoken = await generateAccessToken(user);
-      res.status(200).json({ message: "Login successfull", user: user, token: JWTtoken });
+      res.status(200).json({ message: "Login successful", user: user, token: JWTtoken });
     } catch (error) {
       res.status(500).json({ error: "Internal server error" });
     }
   },
 
+  // Method for retrieving user profile
   getUserProfile: async (req: Request, res: Response) => {
     try {
-      const token = req.headers["authorization"];
-      const decoded = await decodeToken((token as string).slice(7));
-      const userId = decoded.userId;
-      const profile = await ProfileModel.findOne({ user_Id: userId });
+      const user_Id = req.params.userId;
+      const profile = await ProfileModel.findOne({ user_Id });
       if (!profile) {
         return res.status(404).json({ message: "Profile not found" });
       }
@@ -51,6 +51,7 @@ const usercontroller = {
     }
   },
 
+  // Method for creating a new profile
   createProfile: async (req: Request, res: Response) => {
     try {
       const token = req.headers["authorization"];
@@ -61,15 +62,14 @@ const usercontroller = {
       if (profile) {
         return res.status(400).json({ message: "Profile already exists for this user" });
       }
-      console.log(userId);
-      const newprofile = new ProfileModel({
+      const newProfile = new ProfileModel({
         user_Id: userId,
         profile_info,
       });
-      console.log(newprofile, "creaaaaatd profile 1");
-      const createdProfile = await newprofile.save();
-      const userupdated = await UserModel.findByIdAndUpdate(userId, { profile_id: createdProfile._id }, { new: true });
-      console.log(userupdated);
+ 
+      const createdProfile = await newProfile.save();
+      const userUpdated = await UserModel.findByIdAndUpdate(userId, { profile_id: createdProfile._id }, { new: true });
+
 
       res.status(200).json({ message: "Profile created and user updated", createdProfile });
     } catch (error) {
@@ -77,6 +77,7 @@ const usercontroller = {
     }
   },
 
+  // Method for editing an existing profile
   editProfile: async (req: Request, res: Response) => {
     try {
       const token = req.headers["authorization"];
@@ -102,6 +103,7 @@ const usercontroller = {
     }
   },
 
+  // Method for deleting an existing profile
   deleteProfile: async (req: Request, res: Response) => {
     try {
       const token = req.headers["authorization"];
@@ -126,4 +128,4 @@ const usercontroller = {
     }
   },
 };
-export default usercontroller;
+export default userController;
