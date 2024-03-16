@@ -1,14 +1,12 @@
 import express from "express";
-// import {} from "../utils/typesense/typesenseClient";
 import userRoutes from "../src/routes/userRoutes";
 import adminRoutes from "../src/routes/adminRoutes";
 import apiLogger from "../src/middlewares/loggerMiddleware";
-// import { typesenseChangeStreamMiddleware } from "../src/middlewares/typesenseChangeStreamMiddleware";
-// import { initializeTypesense } from "../src/middlewares/typesenseSetupMiddleware";
 import cron from "node-cron";
 import { manageGoogleSheet } from "../utils/googleSheets/googleSheetUpdater";
 import { markEnquiriesAsExpired } from "../utils/EnquiryExpires/enquiryExpiry";
-// import typesenseRouter from "src/routes/typeSenseRouter";
+import initializeTypesense from "../src/middlewares/typesenseSetupMiddleware";
+
 
 export const createServer = () => {
   try {
@@ -19,8 +17,7 @@ export const createServer = () => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    // app.use(initializeTypesense); // create typesense collection if it is not already exist
-    // app.use(typesenseChangeStreamMiddleware);
+    app.use(initializeTypesense);
 
     // Cron job to update Google Sheet runs every 1 hr
     cron.schedule("0 * * * *", async () => {
@@ -31,7 +28,7 @@ export const createServer = () => {
         console.error("An error occurred while updating the Google Sheet:", error);
       }
     });
-    
+
     // Cron job to mark expired enquiries run at everyday at 12 AM
     cron.schedule("0 0 * * *", async () => {
       try {
@@ -49,7 +46,7 @@ export const createServer = () => {
     // Route setup
     app.use("/api/admin", adminRoutes);
     app.use("/api/user", userRoutes);
-    // app.use("/api/typesense", typesenseRouter);
+  
 
     return app;
   } catch (error) {
